@@ -1,0 +1,27 @@
+installation:
+
+FRONTEND
+npx create-next-app@latest frontend --use-npm
+npm install ky
+npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
+
+npm run dev
+
+BACKEND:
+uvicorn main:app --reload
+
+
+
+DOCKER
+docker build -t learning backend/
+docker run -p 8000:8000 learning
+
+docker-compose -f docker-compose.yml up frontend backend 
+
+
+
+POSTGRES
+
+docker run --name postgres-0 -p 5432:5432 -d -e POSTGRES_PASSWORD=password postgres:alpine
+
+psql -d test_db -U postgres -h localhost
