@@ -4,3 +4,6 @@ It consists of:
 - A FastAPI backend (using Python)
 - A Postgres database
 All of these components are containerized using Docker.
+
+To run:
+- make run
