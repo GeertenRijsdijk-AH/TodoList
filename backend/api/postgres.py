@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+import datetime
 import psycopg
 import logging
 from api.models import Task
@@ -46,6 +47,7 @@ def get_tasks() -> list[Task]:
     return [Task(id=task[0], text=task[1], created_at=task[2], done=task[3]) for task in tasks]
 
 def add_task(task: Task) -> Task:
+    task.created_at = datetime.datetime.now()
     with db.get_cursor() as cur:
         cur.execute("INSERT INTO tasks (text, created_at, done) VALUES (%s, %s, %s) RETURNING *", (task.text, task.created_at, task.done))
         taskdict = cur.fetchone()
