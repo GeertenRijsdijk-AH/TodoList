@@ -1,0 +1,13 @@
+FROM node:18-alpine
+
+WORKDIR /frontend
+
+COPY . .
+
+RUN \
+  if [ -f package-lock.json ]; then npm ci; \
+  # Allow install without lockfile, so example works even without Node.js installed locally
+  else echo "Warning: Lockfile not found. It is recommended to commit lockfiles to version control." && npm install; \
+  fi
+
+CMD ["npm", "run", "dev"]
